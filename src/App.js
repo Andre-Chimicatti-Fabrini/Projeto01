@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Botao from "./botao"
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      atual:"",
+      lista:[]
+    }
+  }
+
+  add=()=>{
+    this.state.lista.push(this.state.atual)
+    this.setState({atual:""})
+    console.log(this.state)
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div>
+        <div><p>TODO</p></div>
+        <div><input
+         value={this.state.atual}
+         id="todoentrada" 
+         placeholder="digite um to do"
+         onChange={(txt)=>{this.setState({atual:txt.target.value})}}/></div>
+        <div onClick={this.add}><Botao texto="adicionar"/></div>
+        </div>
+        <div></div>
       </div>
     );
+    //linha 19 seria equivalente a const botao = new  Botao({texto: 'adicionar'})
   }
 }
 
