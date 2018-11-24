@@ -1,4 +1,39 @@
 .App {
-  text-align: center;
+  background-color: #a8ffc8;
+  height: 100%;
+  width: 100%;
+  
 }
+
+.header {
+  background-color: #5350e8;
+  margin-top: -10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.TODO {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.caixaDeTexto{
+  width: 330px;
+
+}
+
+.container {
+  background-color: rgba(255,255,255,0.6);
+  padding: 15px;
+  margin: 24px;
+
+}
+
+
 
