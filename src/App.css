@@ -35,5 +35,16 @@
 
 }
 
+.tarefa {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+.imagemExcluir{
+  width: 20px;
+  height: 20px;
+}
 
-
+ul {
+  list-style-type:none
+}

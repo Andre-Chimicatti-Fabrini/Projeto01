@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Botao from "./botao"
+import excluir from './excluir.jpg'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       atual: "",
-      lista: []
+      lista:[],
+      id: 0
     }
   }
 
   add = () => {
-    this.state.lista.push(this.state.atual)
-    this.setState({ atual: "" })
+    this.state.lista.push(
+      {
+        id: this.state.id,
+        texto: this.state.atual 
+      })
+    
+    this.setState({ atual: "", id: this.state.id + 1 })
     console.log(this.state)
   }
 
+  excluirItem = (indice) => {
+    this.state.lista.splice(indice, 1);
+    console.log(indice)
+  }
+
   render() {
+      
     return (
       <div className="App">
         <div className="header">
@@ -37,8 +49,17 @@ class App extends Component {
           </div>
         </div>
 
-        <div className="container">
-          {this.state.lista.length == 0 ? <p>não há todos</p> : <ul>{this.state.lista.map((valor) => { return (<li>{valor}</li>) })}</ul>}
+        <div className="container"> {this.state.lista.length == 0 ? <p>não há todos</p> : 
+          <ul>{this.state.lista.map((valor) => { return (
+            <li>
+              <div className="tarefa">
+                <div>
+                  <img className="imagemExcluir" src={excluir} alt="" onClick={this.excluirItem(valor.id)}/>
+                </div>
+                <div>{valor.texto}</div>
+              </div>
+            </li>) })}
+          </ul>}
         </div>
       </div>
     );
