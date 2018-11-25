@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Botao from "./botao"
+import BotaoExcluir from './BotaoExcluir'
 import excluir from './excluir.jpg'
 
 class App extends Component {
@@ -8,29 +9,44 @@ class App extends Component {
     super(props)
     this.state = {
       atual: "",
-      lista:[],
+      lista: [],
       id: 0
     }
   }
 
-  add = () => {
-    this.state.lista.push(
-      {
-        id: this.state.id,
-        texto: this.state.atual 
-      })
+  adicionar = () => {
     
-    this.setState({ atual: "", id: this.state.id + 1 })
+    const novaLista = [...this.state.lista,
+    {
+      id: this.state.id,
+      texto: this.state.atual
+    }]
+    this.setState({
+      atual: "",
+      lista: novaLista,
+      id: this.state.id + 1,
+    })
     console.log(this.state)
   }
 
   excluirItem = (indice) => {
-    this.state.lista.splice(indice, 1);
+    
+    var novaLista = this.state.lista
+        
+    novaLista.splice(novaLista.findIndex(function check(x){return x.id==indice}), 1)
+
+    this.setState({
+      lista: novaLista
+    })
+        
+    console.log('excluirItem chamado')
     console.log(indice)
+   
   }
 
   render() {
-      
+
+    console.log(this.state)
     return (
       <div className="App">
         <div className="header">
@@ -44,21 +60,25 @@ class App extends Component {
               placeholder="digite um to do"
               onChange={(txt) => { this.setState({ atual: txt.target.value }) }} />
           </div>
-          <div onClick={this.add}>
-            <Botao texto="adicionar" />
+          <div >
+            <a id="adicionar" >
+              <Botao clique={this.adicionar} texto="adicionar" />
+            </a>
           </div>
         </div>
 
-        <div className="container"> {this.state.lista.length == 0 ? <p>não há todos</p> : 
-          <ul>{this.state.lista.map((valor) => { return (
-            <li>
-              <div className="tarefa">
-                <div>
-                  <img className="imagemExcluir" src={excluir} alt="" onClick={this.excluirItem(valor.id)}/>
+        <div className="container"> {this.state.lista.length == 0 ? <p>não há todos</p> :
+          <ul>{this.state.lista.map((valor, index) => {
+            return (
+              <li id={index}>
+                <div className="tarefa">
+                  <BotaoExcluir                    
+                    clique={() => this.excluirItem(valor.id)}
+                  />
+                  <div>{valor.texto}</div>
                 </div>
-                <div>{valor.texto}</div>
-              </div>
-            </li>) })}
+              </li>)
+          })}
           </ul>}
         </div>
       </div>

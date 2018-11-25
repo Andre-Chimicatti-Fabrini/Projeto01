@@ -7,7 +7,7 @@ class Botao extends Component
     render()
     {
         return (
-        <div className="botao">
+        <div className="botao" onClick={this.props.clique}>
             <p className="textoDoBotao">
             {this.props.texto}
             </p>
